@@ -3,11 +3,11 @@
 # BARK Protocol: Solana-Based Crowdfunding Platform Monorepo
 **Prototype**
 
-Welcome to the BARK Protocol GitHub repository! This repository contains the codebase and documentation for our decentralized crowdfunding platform built on Solana blockchain technology. The BARK Protocol aims to provide a secure, scalable, and user-friendly solution for fundraising, leveraging the high-performance capabilities of the Solana blockchain.
+Welcome to the BARK Protocol GitHub repository! This repository contains the codebase and documentation for our decentralized crowdfunding platform built on the Solana blockchain. The BARK Protocol aims to provide a secure, scalable, and user-friendly solution for fundraising, leveraging the high-performance capabilities of Solana.
 
 ## Overview
 
-The BARK Protocol is designed to enhance the efficiency, security, and transparency of fundraising campaigns. Our platform supports multi-currency contributions, integrates decentralized storage solutions, and uses advanced security measures to ensure a reliable and trustworthy experience for users and campaign creators.
+The BARK Protocol is a decentralized crowdfunding platform that enhances the efficiency, security, and transparency of fundraising campaigns. Built on Solana, our platform supports multi-currency contributions, integrates decentralized storage solutions, and employs advanced security measures to ensure a trustworthy experience for users and campaign creators.
 
 ### Key Features
 
