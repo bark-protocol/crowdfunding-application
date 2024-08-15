@@ -1,6 +1,16 @@
 /**
- * Helper function to delay execution
+ * Helper function to delay execution.
+ * @param ms - The number of milliseconds to delay.
+ * @param reason - Optional reason for the delay (for logging purposes).
  */
-export function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+export function delay(ms: number, reason?: string): Promise<void> {
+  if (reason) {
+    console.log(`Delaying for ${ms}ms: ${reason}`);
+  }
+  return new Promise((resolve) => setTimeout(() => {
+    if (reason) {
+      console.log(`Finished delay: ${reason}`);
+    }
+    resolve();
+  }, ms));
 }

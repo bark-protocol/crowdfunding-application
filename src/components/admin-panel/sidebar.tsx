@@ -8,6 +8,9 @@ import { Menu } from '@/components/admin-panel/menu';
 import { useSidebarToggle } from '@/hooks/use-sidebar-toggle';
 import { SidebarToggle } from '@/components/admin-panel/sidebar-toggle';
 
+// Import your logo image or SVG here
+import Logo from '@/public/logo.svg'; // Ensure correct path to your logo file
+
 export function Sidebar() {
   const sidebar = useStore(useSidebarToggle, (state) => state);
 
@@ -31,6 +34,7 @@ export function Sidebar() {
           asChild
         >
           <Link href="/dashboard" className="flex items-center gap-2">
+            <Logo className="mr-2 h-8 w-8" /> {/* Adjust size as needed */}
             <PanelsTopLeft className="mr-1 h-6 w-6" />
             <h1
               className={cn(
@@ -40,7 +44,7 @@ export function Sidebar() {
                   : 'translate-x-0 opacity-100',
               )}
             >
-              Brand
+              BARK Protocol
             </h1>
           </Link>
         </Button>

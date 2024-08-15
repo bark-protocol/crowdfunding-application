@@ -16,8 +16,8 @@ export default function HomePage() {
             className="flex items-center justify-start transition-opacity duration-300 hover:opacity-85"
           >
             <PanelsTopLeft className="mr-3 h-6 w-6" />
-            <span className="font-bold">crowdfunding solana</span>
-            <span className="sr-only">crowdfunding solana</span>
+            <span className="font-bold">Crowdfunding Platform</span>
+            <span className="sr-only">Crowdfunding Platform</span>
           </Link>
           <nav className="ml-auto flex items-center gap-2">
             <Button
@@ -26,8 +26,68 @@ export default function HomePage() {
               className="h-8 w-8 rounded-full bg-background"
               asChild
             >
-              <Link href="https://github.com/Kds-JS/crowdfunding-solana">
+              <Link href="https://github.com/barkprotocol/crowdfunding-platform">
                 <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-8 w-8 rounded-full bg-background"
+              asChild
+            >
+              <Link href="https://twitter.com/bark_protocol">
+                <Image
+                  src="/twitter-icon.svg"
+                  alt="Twitter"
+                  width={20}
+                  height={20}
+                />
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-8 w-8 rounded-full bg-background"
+              asChild
+            >
+              <Link href="https://medium.com/@barkprotocol">
+                <Image
+                  src="/medium-icon.svg"
+                  alt="Medium"
+                  width={20}
+                  height={20}
+                />
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-8 w-8 rounded-full bg-background"
+              asChild
+            >
+              <Link href="https://discord.com/invite/discordinvite">
+                <Image
+                  src="/discord-icon.svg"
+                  alt="Discord"
+                  width={20}
+                  height={20}
+                />
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-8 w-8 rounded-full bg-background"
+              asChild
+            >
+              <Link href="https://t.me/bark_protocol">
+                <Image
+                  src="/telegram-icon.svg"
+                  alt="Telegram"
+                  width={20}
+                  height={20}
+                />
               </Link>
             </Button>
             <ModeToggle />
@@ -38,25 +98,24 @@ export default function HomePage() {
         <div className="container relative pb-10">
           <section className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-6">
             <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-5xl lg:leading-[1.1]">
-              Sidebar example built on top of crowdfunding-solana
+              Empower Your Vision with Decentralized Crowdfunding
             </h1>
-            <span className="max-w-[750px] text-center text-lg font-light text-foreground">
-              A stunning and functional retractable sidebar for Next.js using
-              crowdfunding-solana complete with desktop and mobile
-              responsiveness.
-            </span>
+            <h2 className="text-center text-2xl font-semibold text-muted-foreground md:text-3xl lg:text-4xl">
+              Unlock the Potential of Blockchain to Fund Your Projects
+            </h2>
+            <p className="max-w-[750px] text-center text-lg font-light text-foreground">
+              Our platform leverages the power of the Solana blockchain to provide secure, transparent, and efficient crowdfunding solutions. Whether you're a creator, innovator, or entrepreneur, bring your ideas to life with decentralized tools and resources.
+            </p>
             <div className="flex w-full items-center justify-center space-x-4 py-4 md:pb-6">
               <Button variant="default" asChild>
                 <Link href="/dashboard/campaigns/new">
-                  Dashboard
+                  Start a Campaign
                   <ArrowRightIcon className="ml-2" />
                 </Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link
-                  href="/campaigns"
-                >
-                  See All Campaigns
+                <Link href="/campaigns">
+                  Explore Campaigns
                 </Link>
               </Button>
             </div>
@@ -98,23 +157,59 @@ export default function HomePage() {
       <footer className="border-t border-border/40 py-6 md:py-0">
         <div className="container flex flex-col items-center justify-center gap-4 md:h-24 md:flex-row">
           <p className="text-balance text-center text-sm leading-loose text-muted-foreground">
-            Built on top of{' '}
+            Visit our official website{' '}
             <Link
-              href="https://solana.com/"
+              href="https://barkprotocol.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium underline underline-offset-4"
             >
-              crowdfunding-solana
+              Bark Protocol
             </Link>
             . The source code is available on{' '}
             <Link
-              href="https://github.com/Kds-JS/crowdfunding-solana"
+              href="https://github.com/barkprotocol/crowdfunding"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium underline underline-offset-4"
             >
               GitHub
+            </Link>
+            . Stay connected with us on{' '}
+            <Link
+              href="https://twitter.com/bark_protocol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              Twitter
+            </Link>{' '}
+            and{' '}
+            <Link
+              href="https://medium.com/@barkprotocol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              Medium
+            </Link>
+            , join our community on{' '}
+            <Link
+              href="https://discord.com/invite/discordinvite"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              Discord
+            </Link>{' '}
+            and{' '}
+            <Link
+              href="https://t.me/bark_protocol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium underline underline-offset-4"
+            >
+              Telegram
             </Link>
             .
           </p>

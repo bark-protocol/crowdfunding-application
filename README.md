@@ -145,12 +145,16 @@ Publish the smart contract:
 anchor deploy
 ```
 
+## Program ID
+
+**Test Account**: 32Qg9Pybde94crQEU8GaoBbhsMtjm2uer3MJZKLDbvHe
+
 ### Solana Testnet Explorer
 
 View the program on the Solana Testnet Explorer:
 
 ```
-https://solscan.io/testnet
+https://solscan.io/testnet/32Qg9Pybde94crQEU8GaoBbhsMtjm2uer3MJZKLDbvHe
 ```
 
 ## Contributing
