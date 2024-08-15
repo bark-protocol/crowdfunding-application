@@ -75,7 +75,7 @@ describe("crowdfunding", () => {
     return campaign;
   }
 
-  describe("Create campaign", async () => {
+  describe("Create campaign", () => {
     it("should revert if invalid params", async () => {
       const startTimestamp = await incrementCurrentTimestamp(0, 0, 0, 1);
       const endTimestamp = await incrementCurrentTimestamp(2, 3);
@@ -158,7 +158,6 @@ describe("crowdfunding", () => {
             testCase.endAt
           );
         } catch (error) {
-          console.log(`Error: ${error.error.errorMessage}`);
           expect(error.error.errorMessage).to.equal(testCase.expectedError);
         }
       }
@@ -186,10 +185,12 @@ describe("crowdfunding", () => {
         1,
         5
       );
+
+      // Additional assertions to verify campaign creation can be added here
     });
   });
 
-  describe("Donate", async () => {
+  describe("Donate", () => {
     async function donateHelper(
       wallet: Keypair,
       campaign: PublicKey,
@@ -237,6 +238,8 @@ describe("crowdfunding", () => {
         campaigns[2],
         contributionAmount3
       );
+
+      // Additional assertions to verify donations can be added here
     });
 
     it("should revert if donation completed", async () => {
@@ -257,12 +260,12 @@ describe("crowdfunding", () => {
           .signers([wallets[3]])
           .rpc();
       } catch (error) {
-        console.log(`Error: ${error.error.errorMessage}`);
+        expect(error.error.errorMessage).to.equal("Donation has already been completed");
       }
     });
   });
 
-  describe("Claim Donations", async () => {
+  describe("Claim Donations", () => {
     it("should be able to claim donations", async () => {
       await delay(3000);
 
@@ -279,7 +282,7 @@ describe("crowdfunding", () => {
 
       await claimDonationsHelper(campaigns[1], wallets[0]);
 
-      // Additional assertions can be added here
+      // Additional assertions to verify donations claiming can be added here
     });
 
     it("should revert if signer is not authority", async () => {
@@ -293,7 +296,7 @@ describe("crowdfunding", () => {
           .signers([wallets[1]])
           .rpc();
       } catch (error) {
-        console.log(`Error: ${error.error.errorMessage}`);
+        expect(error.error.errorMessage).to.equal("Signer is not the authority");
       }
     });
 
@@ -308,7 +311,7 @@ describe("crowdfunding", () => {
           .signers([wallets[0]])
           .rpc();
       } catch (error) {
-        console.log(`Error: ${error.error.errorMessage}`);
+        expect(error.error.errorMessage).to.equal("Donations have already been claimed");
       }
     });
 
@@ -323,12 +326,12 @@ describe("crowdfunding", () => {
           .signers([wallets[1]])
           .rpc();
       } catch (error) {
-        console.log(`Error: ${error.error.errorMessage}`);
+        expect(error.error.errorMessage).to.equal("No completed donations to claim");
       }
     });
   });
 
-  describe("Cancel Donation", async () => {
+  describe("Cancel Donation", () => {
     const cancelDonationHelper = async (
       wallet: Keypair,
       campaign: PublicKey,
@@ -348,14 +351,14 @@ describe("crowdfunding", () => {
     it("should be able to cancel donations", async () => {
       await cancelDonationHelper(wallets[3], campaigns[2], contributions[2][0]);
 
-      // Additional assertions can be added here
+      // Additional assertions to verify donation cancellation can be added here
     });
 
     it("should revert if signer is not donor", async () => {
       try {
         await cancelDonationHelper(wallets[4], campaigns[2], contributions[2][0]);
       } catch (error) {
-        console.log(`Error: ${error.error.errorMessage}`);
+        expect(error.error.errorMessage).to.equal("Signer is not the donor");
       }
     });
 
@@ -363,7 +366,7 @@ describe("crowdfunding", () => {
       try {
         await cancelDonationHelper(wallets[3], campaigns[2], contributions[2][0]);
       } catch (error) {
-        console.log(`Error: ${error.error.errorMessage}`);
+        expect(error.error.errorMessage).to.equal("Donation has already been canceled");
       }
     });
 
@@ -371,12 +374,12 @@ describe("crowdfunding", () => {
       try {
         await cancelDonationHelper(wallets[2], campaigns[1], contributions[1][0]);
       } catch (error) {
-        console.log(`Error: ${error.error.errorMessage}`);
+        expect(error.error.errorMessage).to.equal("Campaign has already been completed");
       }
     });
   });
 
-  describe("Cancel Campaign", async () => {
+  describe("Cancel Campaign", () => {
     const cancelCampaignHelper = async (wallet: Keypair, campaign: PublicKey) => {
       await program.methods
         .cancelCampaign()
@@ -399,14 +402,14 @@ describe("crowdfunding", () => {
 
       await cancelCampaignHelper(wallets[2], campaign);
 
-      // Additional assertions can be added here
+      // Additional assertions to verify campaign cancellation can be added here
     });
 
     it("should revert if signer is not campaign authority", async () => {
       try {
         await cancelCampaignHelper(wallets[3], campaigns[3]);
       } catch (error) {
-        console.log(`Error: ${error.error.errorMessage}`);
+        expect(error.error.errorMessage).to.equal("Signer is not the campaign authority");
       }
     });
 
@@ -414,7 +417,7 @@ describe("crowdfunding", () => {
       try {
         await cancelCampaignHelper(wallets[2], campaigns[2]);
       } catch (error) {
-        console.log(`Error: ${error.error.errorMessage}`);
+        expect(error.error.errorMessage).to.equal("Campaign has already started");
       }
     });
   });

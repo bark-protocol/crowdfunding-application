@@ -1,11 +1,12 @@
 import * as anchor from "@coral-xyz/anchor";
-import { PublicKey, Transaction, SystemProgram, TransactionSignature } from "@solana/web3.js";
+import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { getProgramDerivedCampaign, getProgramDerivedContribution } from "./addressDerivation";
+import idl from "./idl.json"; // Path to your IDL file
 
-// Define the provider
-const provider = anchor.getProvider();
+// Define the provider and program
+const provider = anchor.AnchorProvider.env();
 const programId = new PublicKey("YOUR_PROGRAM_ID"); // Replace with your actual program ID
-const program = new anchor.Program(idl, programId, provider);
+const program = new anchor.Program(idl as anchor.Idl, programId, provider);
 
 /**
  * Creates a new campaign on the Solana blockchain.
@@ -26,20 +27,20 @@ export async function createCampaign(
   const signerKey = provider.wallet.publicKey;
   const { campaign, bump } = await getProgramDerivedCampaign(programId, signerKey, title);
 
-  // Create and send a transaction to create the account for the campaign
+  // Ensure the campaign account is created
   const tx = new Transaction().add(
     SystemProgram.createAccount({
       fromPubkey: signerKey,
       newAccountPubkey: campaign,
       lamports: await provider.connection.getMinimumBalanceForRentExemption(0),
-      space: 0, // Adjust space according to the data size required for the campaign account
+      space: 8 + 200 + 8 + 8 + 8 + 1 + 1, // Adjust the space according to your data
       programId,
     })
   );
 
   await provider.sendAndConfirm(tx);
 
-  // Call the program's createCampaign RPC method
+  // Call the createCampaign method
   await program.rpc.createCampaign(
     title,
     description,
@@ -96,7 +97,7 @@ export async function contributeToCampaign(
   const contributorKey = provider.wallet.publicKey;
   const { contribution } = await getProgramDerivedContribution(programId, contributorKey, campaign);
 
-  // Create and send a transaction to transfer lamports to the contribution account
+  // Transfer lamports to the contribution account
   const tx = new Transaction().add(
     SystemProgram.transfer({
       fromPubkey: contributorKey,
@@ -107,8 +108,8 @@ export async function contributeToCampaign(
 
   await provider.sendAndConfirm(tx);
 
-  // Call the program's contribute RPC method
-  await program.rpc.contribute(
+  // Call the contribute method
+  await program.rpc.donate(
     new anchor.BN(amount),
     {
       accounts: {
@@ -126,7 +127,7 @@ export async function contributeToCampaign(
  * @param campaign - The public key of the campaign.
  */
 export async function claimCampaignFunds(campaign: PublicKey): Promise<void> {
-  const tx = await program.rpc.claimFunds({
+  const tx = await program.rpc.claimDonations({
     accounts: {
       campaign,
       authority: provider.wallet.publicKey,

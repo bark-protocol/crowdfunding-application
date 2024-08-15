@@ -3,7 +3,7 @@ import { Connection } from "@solana/web3.js";
 /**
  * Fetches the current Unix timestamp from the Solana blockchain.
  * @param endpoint - The Solana RPC endpoint (default is mainnet).
- * @returns The current Unix timestamp in seconds.
+ * @returns The current Unix timestamp in seconds, or null if an error occurs.
  */
 export async function getUnixTimestamp(
   endpoint: string = "https://api.mainnet-beta.solana.com"
@@ -14,21 +14,21 @@ export async function getUnixTimestamp(
     const timestamp = await connection.getBlockTime(slot);
 
     if (timestamp === null) {
-      throw new Error("Unable to fetch block time");
+      throw new Error("Unable to fetch block time from the Solana blockchain.");
     }
 
     return timestamp;
   } catch (error) {
     console.error("Error fetching Unix timestamp from Solana blockchain:", error);
-    return null; // Return null or throw an error depending on your application's needs
+    return null;
   }
 }
 
 /**
- * Returns the current local timestamp in seconds.
+ * Returns the current local Unix timestamp in seconds.
  * @returns The current local Unix timestamp in seconds.
  */
-export async function getTimestamp(): Promise<number> {
+export function getTimestamp(): number {
   const now = new Date();
   return Math.floor(now.getTime() / 1000);
 }
@@ -40,16 +40,16 @@ export async function getTimestamp(): Promise<number> {
  * @param minutes - Number of minutes to increment (default is 0).
  * @param seconds - Number of seconds to increment (default is 0).
  * @returns The incremented timestamp in seconds.
+ * @throws Will throw an error if any of the increment values are negative.
  */
-export async function incrementCurrentTimestamp(
+export function incrementCurrentTimestamp(
   days: number = 0,
   hours: number = 0,
   minutes: number = 0,
   seconds: number = 0
-): Promise<number> {
-  // Input validation: ensure that the parameters are non-negative
+): number {
   if (days < 0 || hours < 0 || minutes < 0 || seconds < 0) {
-    throw new Error("Increment values must be non-negative");
+    throw new Error("Increment values must be non-negative.");
   }
 
   const now = new Date();

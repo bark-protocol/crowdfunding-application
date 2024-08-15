@@ -1,5 +1,5 @@
 import * as anchor from "@coral-xyz/anchor";
-import { PublicKey } from "@solana/web3.js";
+import { PublicKey, Connection, TransactionSignature } from "@solana/web3.js";
 
 /**
  * Airdrops SOL to a specified public key.
@@ -8,8 +8,14 @@ import { PublicKey } from "@solana/web3.js";
  */
 export async function airdropSol(publicKey: PublicKey, amount: number): Promise<void> {
   try {
+    // Get the provider and connection from the Anchor framework
     const provider = anchor.getProvider();
-    const airdropTx = await provider.connection.requestAirdrop(publicKey, amount);
+    const connection = provider.connection;
+
+    // Request the airdrop
+    const airdropTx: TransactionSignature = await connection.requestAirdrop(publicKey, amount);
+
+    // Confirm the transaction
     await confirmTransaction(airdropTx);
   } catch (error) {
     console.error("Failed to airdrop SOL:", error);
@@ -21,16 +27,16 @@ export async function airdropSol(publicKey: PublicKey, amount: number): Promise<
  * Confirms a transaction on the Solana blockchain.
  * @param tx - The transaction signature to be confirmed.
  */
-export async function confirmTransaction(tx: string): Promise<void> {
+export async function confirmTransaction(tx: TransactionSignature): Promise<void> {
   try {
+    // Get the provider and connection from the Anchor framework
     const provider = anchor.getProvider();
-    const latestBlockHash = await provider.connection.getLatestBlockhash();
+    const connection = provider.connection;
 
-    await provider.connection.confirmTransaction({
-      blockhash: latestBlockHash.blockhash,
-      lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
-      signature: tx,
-    });
+    // Wait for the transaction to be confirmed
+    await connection.confirmTransaction(tx, 'confirmed'); // 'confirmed' ensures the transaction is confirmed
+
+    console.log(`Transaction ${tx} confirmed.`);
   } catch (error) {
     console.error("Failed to confirm transaction:", error);
     throw error;

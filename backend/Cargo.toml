@@ -4,9 +4,10 @@ members = [
 ]
 
 [profile.release]
-overflow-checks = true
-lto = "fat"
+overflow-checks = false # Consider turning off overflow checks for production
+lto = "fat" # Or "thin" for a balance between build time and optimization
 codegen-units = 1
+
 [profile.release.build-override]
 opt-level = 3
 incremental = false
