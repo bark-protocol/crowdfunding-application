@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
-import { WalletContextProvider } from '@/components/WalletContextProvider'; // Ensure correct path
-import { AuthContext } from '@/components/AuthContext'; // Ensure correct path
+import { WalletContextProvider } from '@/components/wallets/WalletContextProvider';
+import { AuthContext } from '@/components/wallets/AuthContext';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import './globals.css';
