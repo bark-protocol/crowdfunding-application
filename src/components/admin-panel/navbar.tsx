@@ -1,10 +1,11 @@
 'use client';
 
+import Link from 'next/link';
+import Image from 'next/image';  // Import Image component if using Next.js Image
 import { SheetMenu } from '@/components/admin-panel/sheet-menu';
 import { WalletConnectButton } from '@/components/wallets';
 import { ModeToggle } from '@/components';
 import { SelectNetwork } from '@/components/admin-panel/select-network';
-import Image from 'next/image';  // Import Image component if using Next.js Image
 
 interface NavbarProps {
   title: string;
@@ -12,30 +13,28 @@ interface NavbarProps {
 
 export function Navbar({ title }: NavbarProps) {
   return (
-    <header className="sticky top-0 z-10 w-full bg-background/95 shadow backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:shadow-secondary">
-      <div className="mx-4 flex h-14 items-center sm:mx-8">
+    <header className="sticky top-0 z-10 w-full bg-background/95 shadow-md backdrop-blur-sm supports-[backdrop-filter]:bg-background/60 dark:bg-black/[0.7] dark:shadow-secondary">
+      <div className="container mx-auto flex h-16 items-center px-4 sm:px-6 md:px-8">
         <div className="flex items-center space-x-4 lg:space-x-6">
-          <SheetMenu />
+          <SheetMenu aria-label="Admin Menu" />
           {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/" passHref>
-              <Image
-                src="/assets/logo.svg"  // Replace with the path to logo
-                alt="Logo"
-                width={40}  // Adjust the width as needed
-                height={40}  // Adjust the height as needed
-                className="w-auto h-auto"
-              />
-            </Link>
-          </div>
-          <h1 className="hidden font-bold sm:block">{title}</h1>
+          <Link href="/" passHref aria-label="Homepage">
+            <Image
+              src="/bark-icon.png"  // Replace with the path to BARK Icon logo
+              alt="BARK Protocol Logo"
+              width={48}  // Adjust the width as needed
+              height={48}  // Adjust the height as needed
+              className="w-12 h-12"
+            />
+          </Link>
+          <h1 className="hidden text-xl font-bold text-primary sm:block">{title}</h1>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-2">
-          <ModeToggle />
+          <ModeToggle aria-label="Toggle Dark Mode" />
           <div className="hidden sm:block">
-            <SelectNetwork />
+            <SelectNetwork aria-label="Select Network" />
           </div>
-          <WalletConnectButton />
+          <WalletConnectButton aria-label="Connect Wallet" />
         </div>
       </div>
     </header>

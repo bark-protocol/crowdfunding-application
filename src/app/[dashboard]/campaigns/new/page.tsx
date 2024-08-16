@@ -1,5 +1,4 @@
 import Link from 'next/link';
-
 import { ContentLayout } from '@/components/admin-panel/content-layout';
 import {
   Breadcrumb,
@@ -18,13 +17,13 @@ export default function NewCampaignPage() {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/">Home</Link>
+              <Link href="/" aria-label="Go to homepage">Home</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/dashboard/campaigns">Campaigns</Link>
+              <Link href="/dashboard/campaigns" aria-label="Go to campaigns">Campaigns</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

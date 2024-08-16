@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { CampaignDetail } from '@/components';
 import { CampaignData, IPFS_BASE_URL } from '@/types';
@@ -14,11 +14,15 @@ interface CampaignProps {
 
 export const Campaign = ({ pda }: CampaignProps) => {
   const [campaign, setCampaign] = useState<CampaignData | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const { program } = useContext(SessionContext);
   const { publicKey } = useWallet();
 
-  async function getCampaign() {
+  const getCampaign = useCallback(async () => {
     if (program && publicKey) {
+      setLoading(true);
+      setError(null);
       try {
         const campaignData = await program.account.campaign.fetch(pda);
 
@@ -37,25 +41,32 @@ export const Campaign = ({ pda }: CampaignProps) => {
           isClaimed: campaignData.claimed,
         };
         setCampaign(newCampaign);
-      } catch (error: any) {
+      } catch (error) {
+        setError('Failed to fetch campaign details. Please try again.');
         setCampaign(null);
-        console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
-  }
+  }, [program, publicKey, pda]);
 
   useEffect(() => {
     getCampaign();
-  }, [program, publicKey]);
+  }, [getCampaign]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div className="text-red-500">{error}</div>;
 
   return (
     <Card className="mt-6 min-h-[calc(100vh_-_220px)] rounded-lg border-none">
       <CardContent className="p-6">
-        {campaign && (
+        {campaign ? (
           <CampaignDetail
             campaign={campaign}
             handleUpdateCampaign={getCampaign}
           />
+        ) : (
+          <div>No campaign details available.</div>
         )}
       </CardContent>
     </Card>

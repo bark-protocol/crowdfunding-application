@@ -11,8 +11,10 @@ import { ToastContainer } from 'react-toastify';
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.APP_URL || 
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : `http://localhost:${process.env.PORT || 3000}`)
+    process.env.APP_URL ||
+    (process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : `http://localhost:${process.env.PORT || 3000}`)
   ),
   title: 'BARK',
   description: 'A crowdfunding dapp built on Solana',
@@ -20,14 +22,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={GeistSans.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ToastContainer pauseOnHover theme="colored" />
           <WalletContextProvider>
-            <AuthContext>{children}</AuthContext>
+            <AuthContext>
+              {children}
+            </AuthContext>
           </WalletContextProvider>
         </ThemeProvider>
       </body>

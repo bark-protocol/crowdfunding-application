@@ -8,8 +8,13 @@ interface ContentLayoutProps {
 export function ContentLayout({ title, children }: ContentLayoutProps) {
   return (
     <div>
+      {/* Navbar component */}
       <Navbar title={title} />
-      <div className="container px-4 pb-8 pt-8 sm:px-8">{children}</div>
+      
+      {/* Main content area */}
+      <main className="container mx-auto px-4 sm:px-8 pt-8 pb-8">
+        {children}
+      </main>
     </div>
   );
 }

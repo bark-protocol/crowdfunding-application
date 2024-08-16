@@ -23,10 +23,11 @@ export default function CampaignsPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Campaigns</BreadcrumbPage>
+            <BreadcrumbPage aria-current="page">Campaigns</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+      {/* Render the list of campaigns */}
       <CampaignList />
     </ContentLayout>
   );

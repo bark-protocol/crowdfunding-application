@@ -11,9 +11,7 @@ export default function AdminPanelLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const sidebar = useStore(useSidebarToggle, (state) => state);
-
-  if (!sidebar) return null;
+  const { isOpen } = useStore(useSidebarToggle, (state) => state);
 
   return (
     <>
@@ -21,7 +19,7 @@ export default function AdminPanelLayout({
       <main
         className={cn(
           'min-h-[calc(100vh_-_56px)] bg-zinc-50 transition-[margin-left] duration-300 ease-in-out dark:bg-zinc-900',
-          sidebar?.isOpen === false ? 'lg:ml-[90px]' : 'lg:ml-72',
+          isOpen ? 'lg:ml-72' : 'lg:ml-[90px]'
         )}
       >
         {children}
@@ -29,7 +27,7 @@ export default function AdminPanelLayout({
       <footer
         className={cn(
           'transition-[margin-left] duration-300 ease-in-out',
-          sidebar?.isOpen === false ? 'lg:ml-[90px]' : 'lg:ml-72',
+          isOpen ? 'lg:ml-72' : 'lg:ml-[90px]'
         )}
       >
         <Footer />
