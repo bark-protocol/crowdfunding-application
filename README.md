@@ -1,4 +1,4 @@
-![Banner](.github/assets/github-banner.png)
+![Banner](screenshots/screenshot.png)
 
 # BARK Protocol: Solana-Based Crowdfunding Platform Monorepo
 **Prototype**
