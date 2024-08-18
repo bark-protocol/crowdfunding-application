@@ -1,60 +1,69 @@
 ![Banner](screenshots/screenshot.png)
 
 # BARK Protocol: Solana-Based Crowdfunding Platform Monorepo
+
 **Prototype**
 
-Welcome to the BARK Protocol GitHub repository! This repository contains the codebase and documentation for our decentralized crowdfunding platform built on the Solana blockchain. The BARK Protocol aims to provide a secure, scalable, and user-friendly solution for fundraising, leveraging the high-performance capabilities of Solana.
+Welcome to the BARK Crowdfunding GitHub repository! This repository contains the codebase and documentation for our decentralized crowdfunding platform built on the Solana blockchain. BARK Protocol provides a secure, scalable, and user-friendly solution for fundraising, leveraging Solana’s high-performance capabilities.
 
 ## Overview
 
-The BARK Protocol is a decentralized crowdfunding platform that enhances the efficiency, security, and transparency of fundraising campaigns. Built on Solana, our platform supports multi-currency contributions, integrates decentralized storage solutions, and employs advanced security measures to ensure a trustworthy experience for users and campaign creators.
+BARK | Crowdfunding dApp is designed to enhance the efficiency, security, and transparency of fundraising campaigns. It supports multi-currency contributions, integrates decentralized storage solutions, and employs advanced security measures.
 
 ### Key Features
 
-- **Solana Blockchain Integration:** Utilizes the high-performance Solana blockchain for fast and secure transactions.
-- **Secure Donations:** Donations are made securely using blockchain technology, ensuring transparency and immutability.
-- **Automated Token Minting:** Fundraiser tokens are automatically minted and distributed to donors as proof of contribution.
-- **Digital Fund Receipts:** Donors receive digital receipts for their contributions, maintaining a verifiable record of transactions.
-- **Decentralized Storage:** Employs Arweave/IPFS for durable and censorship-resistant data storage.
-- **Smart Contracts:** Automates fundraising processes and enforces campaign rules using Solana's native programming language.
-- **Cross-Chain Functionality:** Integrates Chainlink and PYTH oracles for real-world data integration and enhanced functionality.
-- **User-Friendly Frontend:** Built with React.js, providing an intuitive interface for campaign management and donation processing.
-- **Wallet Integration:** Supports Solana-compatible wallets for secure authentication and transactions.
-- **Solana Pay Integration:** Facilitates seamless and secure payments through Solana Pay for efficient donation processing.
+- **Solana Blockchain Integration**: Utilizes Solana for fast, secure transactions.
+- **Secure Donations**: Blockchain-based donations ensure transparency and immutability.
+- **Automated Token Minting**: Fundraiser tokens are minted and distributed to donors.
+- **Digital Fund Receipts**: Receipts are provided for all contributions.
+- **Decentralized Storage**: Uses Arweave/IPFS for durable, censorship-resistant storage.
+- **Programs (Smart Contracts)**: Automates fundraising and enforces campaign rules.
+- **Cross-Chain Functionality**: Integrates Chainlink and PYTH oracles for real-world data.
+- **User-Friendly Frontend**: Built with React.js for an intuitive user interface.
+- **Wallet Integration**: Supports Solana-compatible wallets.
+- **Solana Pay Integration**: Enables seamless payments via Solana Pay.
+- **Payment Gateways**: BARK’s Web3 Payments Gateway supports donations and payments in BARK, SOL, and USDC, offering flexibility and convenience for contributors.
 
 ## Architecture
 
 ### Components
 
-1. **Frontend (React.js):**
-   - Dynamic user interfaces for campaign management and donation processing.
-   - Integration with Solana Web3.js and Solana Pay API for blockchain interactions and payment processing.
+1. **Frontend (React.js)**:
+   - Dynamic interfaces for campaign management and donations.
+   - Integration with Solana Web3.js and Solana Pay API.
 
-2. **Backend (Solana Blockchain):**
-   - High-performance blockchain network handling transactions and program execution.
-   - Smart contracts (programs) written in Solana’s native language for campaign automation.
+2. **Backend (Solana Blockchain)**:
+   - Handles transactions and program execution.
+   - Smart contracts in Solana’s native language.
 
-3. **Decentralized Storage:**
-   - **Arweave/IPFS:** Secure storage for campaign metadata and media files.
+3. **Decentralized Storage**:
+   - **Arweave/IPFS**: For campaign metadata and media files.
 
-4. **APIs and SDKs:**
-   - **Solana Web3.js:** Facilitates interaction between the frontend and the Solana blockchain.
-   - **Solana Pay API:** Provides secure and efficient payment processing capabilities.
-   - Third-party APIs for additional functionalities such as identity verification and data aggregation.
+4. **APIs and SDKs**:
+   - **Solana Web3.js**: Facilitates frontend and blockchain interaction.
+   - **Solana Pay API**: For secure payment processing.
+   - Third-party APIs for identity verification and data aggregation.
 
-5. **Security Components:**
-   - **Encryption:** End-to-end encryption for data security.
-   - **Authentication:** Secure wallet-based authentication methods.
+5. **Payments Gateway**:
+   - **Solana Pay**: @solana/pay is a JavaScript library for facilitating commerce on Solana by using a token transfer URL scheme. The URL scheme ensures that no matter the wallet or service used, the payment request must be created and interpreted in one standard way.
+   - **BARK Web3 Payments Gateway**: Supports donations and payments in BARK, SOL, and USDC, offering flexibility and convenience.
 
-6. **Oracles and External Integrations:**
-   - **Chainlink:** Provides decentralized oracles for real-world data.
-   - **PYTH:** Delivers high-fidelity financial market data.
+6. **Payments Widget**:
+   - **Integrated Widget**: Provides an embedded, user-friendly interface for making payments and donations directly within the platform, streamlining the donation process.
 
-7. **Governance:**
-   - Community-driven governance mechanisms for protocol upgrades and policy changes.
+7. **Security Components**:
+   - **Encryption**: End-to-end encryption for data security.
+   - **Authentication**: Secure wallet-based methods.
 
-8. **Monitoring and Analytics:**
-   - Tools for tracking blockchain performance and analyzing user interactions.
+8. **Oracles and External Integrations**:
+   - **Chainlink**: Decentralized oracles for real-world data.
+   - **PYTH**: High-fidelity financial market data.
+
+9. **Governance**:
+   - Community-driven mechanisms for protocol upgrades and policies.
+
+10. **Monitoring and Analytics**:
+    - Tools for tracking blockchain performance and user interactions.
 
 ### Architecture Diagram
 
@@ -62,9 +71,9 @@ The BARK Protocol is a decentralized crowdfunding platform that enhances the eff
 
 ## Use Cases
 
-- **Charity Fundraising:** Non-profits can leverage BARK Protocol for transparent and efficient fundraising, ensuring that donations are used effectively.
-- **Project Funding:** Startups and projects can raise funds while providing immediate liquidity for their tokens, enhancing their market presence.
-- **Community Initiatives:** Community-driven projects can benefit from automated and transparent fundraising mechanisms.
+- **Charity Fundraising**: Non-profits can use BARK Protocol for transparent fundraising.
+- **Project Funding**: Startups can raise funds with immediate token liquidity.
+- **Community Initiatives**: Community projects benefit from automated and transparent fundraising.
 
 ![screenshot](./frontend/assets/screenshot1.png)
 ![screenshot](./frontend/assets/screenshot2.png)
@@ -72,18 +81,18 @@ The BARK Protocol is a decentralized crowdfunding platform that enhances the eff
 
 ## Getting Started
 
-To get started with the BARK Protocol, follow the instructions below:
+To get started with BARK Protocol, follow these steps:
 
 ### Prerequisites
 
-- **Node.js:** Ensure you have Node.js and npm installed.
-- **Solana-Compatible Wallet:** For interacting with the blockchain.
-- **Arweave/IPFS Access:** For decentralized storage.
-- **Solana Pay Integration:** Set up for handling payments.
+- **Node.js**: Ensure Node.js and npm are installed.
+- **Solana-Compatible Wallet**: For blockchain interactions.
+- **Arweave/IPFS Access**: For decentralized storage.
+- **Solana Pay Integration**: For payment processing.
 
 ### Environment Variables
 
-Rename the file `env.local.example` to `env.local` and add the required environment variables in the file:
+Rename `env.local.example` to `env.local` and add the required variables:
 
 ```
 NEXT_PUBLIC_MAINNET_PROGRAM_ID=
@@ -104,6 +113,9 @@ NEXT_PUBLIC_OPENID_PROVIDER_URL=https://accounts.google.com/.well-known/openid-c
 NEXT_PUBLIC_FULLNODE_URL=https://fullnode.testnet.solana:443
 NEXT_PUBLIC_PACKAGE_ID=
 ```
+## Programs
+
+**Escrow Public Key**: 
 
 ### Running the App
 
@@ -123,7 +135,7 @@ cd contract
 
 ### Testing the Program
 
-Run tests using:
+Run tests with:
 
 ```bash
 anchor test
@@ -139,7 +151,7 @@ anchor build
 
 ### Deploying the Program
 
-Publish the smart contract:
+Deploy the smart contract:
 
 ```bash
 anchor deploy
@@ -153,13 +165,11 @@ anchor deploy
 
 View the program on the Solana Testnet Explorer:
 
-```
-https://solscan.io/testnet/32Qg9Pybde94crQEU8GaoBbhsMtjm2uer3MJZKLDbvHe
-```
+[Solana Testnet Explorer](https://solscan.io/testnet/32Qg9Pybde94crQEU8GaoBbhsMtjm2uer3MJZKLDbvHe)
 
 ## Contributing
 
-We welcome contributions to the BARK Protocol! Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to this project.
+We welcome contributions! Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines.
 
 ## License
 
@@ -167,15 +177,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Disclaimer
 
-The information provided in this repository is for informational purposes only and does not constitute financial, legal, or investment advice. Participants should seek professional guidance before engaging with the BARK Protocol platform. Participation involves risks including market volatility and regulatory changes. By using our platform, you acknowledge and accept these risks.
+This repository is for informational purposes only and does not constitute financial, legal, or investment advice. Participants should seek professional guidance before engaging with the BARK Protocol platform.
 
 ### NEXT.js
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project uses [Next.js](https://nextjs.org/) and was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Getting Started with Next.js
 
-First, run the development server:
+Run the development server:
 
 ```bash
 npm run dev
@@ -187,23 +197,20 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Edit `app/page.tsx` to start customizing your page. The page auto-updates as you edit.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) for font optimization.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - An interactive tutorial.
+- [Solana Pay](https://www.npmjs.com/package/@solana/pay).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Deploy your Next.js app with [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme). Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

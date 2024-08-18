@@ -20,10 +20,10 @@ export function Navbar({ title }: NavbarProps) {
           {/* Logo */}
           <Link href="/" passHref aria-label="Homepage">
             <Image
-              src="/bark-icon.png"  // Replace with the path to BARK Icon logo
-              alt="BARK Protocol Logo"
-              width={48}  // Adjust the width as needed
-              height={48}  // Adjust the height as needed
+              src="/charity-icon.png"
+              alt="Charity Logo"
+              width={34}  // Adjust the width as needed
+              height={34}  // Adjust the height as needed
               className="w-12 h-12"
             />
           </Link>

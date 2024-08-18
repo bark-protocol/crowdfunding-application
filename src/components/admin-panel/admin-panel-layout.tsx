@@ -6,12 +6,14 @@ import { Footer } from '@/components/admin-panel/footer';
 import { Sidebar } from '@/components/admin-panel/sidebar';
 import { useSidebarToggle } from '@/hooks/use-sidebar-toggle';
 
-export default function AdminPanelLayout({
-  children,
-}: {
+interface AdminPanelLayoutProps {
   children: React.ReactNode;
-}) {
-  const { isOpen } = useStore(useSidebarToggle, (state) => state);
+}
+
+export default function AdminPanelLayout({ children }: AdminPanelLayoutProps) {
+  const sidebar = useStore(useSidebarToggle, (state) => state);
+
+  if (!sidebar) return null;
 
   return (
     <>
@@ -19,7 +21,7 @@ export default function AdminPanelLayout({
       <main
         className={cn(
           'min-h-[calc(100vh_-_56px)] bg-zinc-50 transition-[margin-left] duration-300 ease-in-out dark:bg-zinc-900',
-          isOpen ? 'lg:ml-72' : 'lg:ml-[90px]'
+          sidebar.isOpen ? 'lg:ml-72' : 'lg:ml-[90px]'
         )}
       >
         {children}
@@ -27,7 +29,7 @@ export default function AdminPanelLayout({
       <footer
         className={cn(
           'transition-[margin-left] duration-300 ease-in-out',
-          isOpen ? 'lg:ml-72' : 'lg:ml-[90px]'
+          sidebar.isOpen ? 'lg:ml-72' : 'lg:ml-[90px]'
         )}
       >
         <Footer />

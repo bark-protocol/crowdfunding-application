@@ -6,8 +6,6 @@
 
 @layer base {
   :root {
-    /* Light theme colors */
-    --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -40,8 +38,6 @@
   }
 
   .dark {
-    /* Dark theme colors */
-    --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -75,37 +71,34 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-gray-200;
   }
   body {
-    @apply bg-background text-foreground font-sans; /* Apply the Inter font globally */
+    @apply bg-background text-foreground font-sans;
   }
 }
 
 @layer components {
-  /* Enhanced button styles with lighter colors and better focus/active states */
   .btn-orange {
     @apply bg-orange-400 text-orange-foreground border-transparent rounded-md px-4 py-2 font-semibold transition-colors duration-300 ease-in-out;
-    &:hover {
-      @apply bg-orange-500;
-    }
-    &:focus {
-      @apply outline-none ring-2 ring-orange-300;
-    }
-    &:active {
-      @apply bg-orange-600;
-    }
+  }
+  .btn-orange:hover {
+    @apply bg-orange-500;
+  }
+  .btn-orange:focus {
+    @apply outline-none ring-2 ring-orange-300;
+  }
+  .btn-orange:active {
+    @apply bg-orange-600;
   }
 
-  /* Improved card component with better shadow */
   .card {
     @apply bg-card text-card-foreground rounded-lg shadow-lg p-4 transition-shadow duration-300 ease-in-out;
-    &:hover {
-      @apply shadow-xl;
-    }
+  }
+  .card:hover {
+    @apply shadow-xl;
   }
 
-  /* Improved responsiveness for buttons */
   @media (max-width: 640px) {
     .btn-orange {
       @apply px-3 py-1.5 text-sm;

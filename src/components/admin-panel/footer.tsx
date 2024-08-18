@@ -35,13 +35,15 @@ export function Footer() {
             href="https://twitter.com/bark_protocol"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Follow us on Twitter"
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
           >
             <Image
               src="/twitter-icon.svg"
               alt="Twitter"
-              width={20} // Adjust size for smaller icons
-              height={20}
+              width={24}
+              height={24}
+              layout="fixed"
               className="transition-transform duration-300 hover:scale-110"
             />
           </Link>
@@ -49,13 +51,15 @@ export function Footer() {
             href="https://t.me/bark_protocol"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Follow us on Telegram"
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
           >
             <Image
               src="/telegram-icon.svg"
               alt="Telegram"
-              width={20} // Adjust size for smaller icons
-              height={20}
+              width={24}
+              height={24}
+              layout="fixed"
               className="transition-transform duration-300 hover:scale-110"
             />
           </Link>
@@ -63,18 +67,21 @@ export function Footer() {
             href="https://medium.com/@barkprotocol"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Follow us on Medium"
             className="text-muted-foreground hover:text-primary transition-colors duration-300"
           >
             <Image
               src="/medium-icon.svg"
               alt="Medium"
-              width={20} // Adjust size for smaller icons
-              height={20}
+              width={24}
+              height={24}
+              layout="fixed"
               className="transition-transform duration-300 hover:scale-110"
             />
           </Link>
           <Link
             href="/terms-of-use"
+            aria-label="Terms of Use"
             className="text-sm text-muted-foreground underline hover:text-primary transition-colors duration-300"
           >
             Terms of Use

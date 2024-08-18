@@ -4,7 +4,7 @@ import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { getAccountBalance } from '@/services/web3';
-import { SessionContext } from './Sessions';
+import { SessionContext } from './sessions';
 
 type BaseWalletMultiButtonProps = any & {
   labels: Omit<

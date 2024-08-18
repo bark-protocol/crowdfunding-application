@@ -1,7 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image'; // Import Image component from Next.js
-import { PanelsTopLeft } from 'lucide-react';
-
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/hooks/use-store';
 import { Button } from '@/components/ui/button';
@@ -9,8 +7,9 @@ import { Menu } from '@/components/admin-panel/menu';
 import { useSidebarToggle } from '@/hooks/use-sidebar-toggle';
 import { SidebarToggle } from '@/components/admin-panel/sidebar-toggle';
 
-// Import your logo image here
-import Logo from '/public/logo.png'; // Ensure correct path to your logo file
+// BARK logo images
+import LogoLight from '/public/logo-light.png'; // Light mode logo
+import LogoDark from '/public/logo-dark.png'; // Dark mode logo
 
 export function Sidebar() {
   // Get sidebar state and methods from the store
@@ -18,6 +17,9 @@ export function Sidebar() {
 
   // If sidebar state is not available, render nothing
   if (!sidebar) return null;
+
+  // Determine current theme
+  const isDarkMode = typeof window !== 'undefined' ? document.documentElement.classList.contains('dark') : false;
 
   return (
     <aside
@@ -38,23 +40,23 @@ export function Sidebar() {
         >
           <Link href="/dashboard" className="flex items-center gap-2">
             <Image
-              src={Logo}  // Use the Image component to render the logo
+              src={isDarkMode ? LogoDark : LogoLight}  // Conditionally set logo based on the theme
               alt="BARK Protocol Logo"
-              width={32}   // Adjust width as needed
-              height={32}  // Adjust height as needed
+              width={100}   // Adjust width as needed
+              height={100}  // Adjust height as needed
               className="mr-2"
             />
-            <PanelsTopLeft className="mr-1 h-6 w-6" />
-            <h1
+            <h7
               className={cn(
-                'whitespace-nowrap text-lg font-bold transition-transform duration-300 ease-in-out',
+                'whitespace-nowrap text-lg font-medium transition-transform duration-200 ease-in-out',
                 sidebar?.isOpen === false
-                  ? 'hidden -translate-x-96 opacity-0'
-                  : 'opacity-100',
+                  ? 'hidden -translate-x-95 opacity-0'
+                  : 'opacity-80',
               )}
             >
-              BARK Protocol
-            </h1>
+              {/* Sidebar title or content */}
+              BETA
+            </h7>
           </Link>
         </Button>
         <Menu isOpen={sidebar?.isOpen} />

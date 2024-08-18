@@ -1,30 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useStore as useZustandStore } from 'zustand';
 
 export const useStore = <T, F>(
-  store: (callback: (state: T) => F) => F,
+  store: (callback: (state: T) => unknown) => unknown,
   callback: (state: T) => F,
-): F | undefined => {
-  // Access the store state using Zustand's useStore or similar method
+) => {
+  const result = store(callback) as F;
   const [data, setData] = useState<F>();
 
   useEffect(() => {
-    // Create a function to update state with the store's state
-    const updateData = () => {
-      const result = store(callback);
-      setData(result);
-    };
-
-    // Update data initially
-    updateData();
-
-    // Optionally, if the store provides a subscription method
-    // Add logic here to subscribe to store updates if needed
-
-    return () => {
-      // Cleanup logic if needed
-    };
-  }, [store, callback]); // Dependencies are store and callback
+    setData(result);
+  }, [result]);
 
   return data;
 };
