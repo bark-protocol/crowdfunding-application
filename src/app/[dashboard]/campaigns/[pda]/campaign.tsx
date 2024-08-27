@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { CampaignDetail } from '@/components';
 import { CampaignData, IPFS_BASE_URL } from '@/types';
@@ -12,17 +12,13 @@ interface CampaignProps {
   pda: string;
 }
 
-export const Campaign = ({ pda }: CampaignProps) => {
+export const Campaign: React.FC<CampaignProps> = ({ pda }) => {
   const [campaign, setCampaign] = useState<CampaignData | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
   const { program } = useContext(SessionContext);
   const { publicKey } = useWallet();
 
-  const getCampaign = useCallback(async () => {
+  const fetchCampaign = async () => {
     if (program && publicKey) {
-      setLoading(true);
-      setError(null);
       try {
         const campaignData = await program.account.campaign.fetch(pda);
 
@@ -40,22 +36,18 @@ export const Campaign = ({ pda }: CampaignProps) => {
           donationCompleted: campaignData.donationCompleted,
           isClaimed: campaignData.claimed,
         };
+        
         setCampaign(newCampaign);
       } catch (error) {
-        setError('Failed to fetch campaign details. Please try again.');
+        console.error('Failed to fetch campaign data:', error);
         setCampaign(null);
-      } finally {
-        setLoading(false);
       }
     }
-  }, [program, publicKey, pda]);
+  };
 
   useEffect(() => {
-    getCampaign();
-  }, [getCampaign]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
+    fetchCampaign();
+  }, [program, publicKey]);
 
   return (
     <Card className="mt-6 min-h-[calc(100vh_-_220px)] rounded-lg border-none">
@@ -63,10 +55,10 @@ export const Campaign = ({ pda }: CampaignProps) => {
         {campaign ? (
           <CampaignDetail
             campaign={campaign}
-            handleUpdateCampaign={getCampaign}
+            handleUpdateCampaign={fetchCampaign}
           />
         ) : (
-          <div>No campaign details available.</div>
+          <p>Loading campaign data...</p>
         )}
       </CardContent>
     </Card>

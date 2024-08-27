@@ -12,14 +12,14 @@ BARK | Crowdfunding dApp is designed to enhance the efficiency, security, and tr
 
 ### Key Features
 
+- **User-Friendly Interface**: Built with React.js, Next.js, and Shadcn for a seamless experience.
 - **Solana Blockchain Integration**: Utilizes Solana for fast, secure transactions.
 - **Secure Donations**: Blockchain-based donations ensure transparency and immutability.
 - **Automated Token Minting**: Fundraiser tokens are minted and distributed to donors.
 - **Digital Fund Receipts**: Receipts are provided for all contributions.
 - **Decentralized Storage**: Uses Arweave/IPFS for durable, censorship-resistant storage.
-- **Programs (Smart Contracts)**: Automates fundraising and enforces campaign rules.
+- **Programs (Smart Contracts)**: Anchor-based programs automate fundraising and enforce campaign rules.
 - **Cross-Chain Functionality**: Integrates Chainlink and PYTH oracles for real-world data.
-- **User-Friendly Frontend**: Built with React.js for an intuitive user interface.
 - **Wallet Integration**: Supports Solana-compatible wallets.
 - **Solana Pay Integration**: Enables seamless payments via Solana Pay.
 - **Payment Gateways**: BARK’s Web3 Payments Gateway supports donations and payments in BARK, SOL, and USDC, offering flexibility and convenience for contributors.
@@ -45,7 +45,7 @@ BARK | Crowdfunding dApp is designed to enhance the efficiency, security, and tr
    - Third-party APIs for identity verification and data aggregation.
 
 5. **Payments Gateway**:
-   - **Solana Pay**: @solana/pay is a JavaScript library for facilitating commerce on Solana by using a token transfer URL scheme. The URL scheme ensures that no matter the wallet or service used, the payment request must be created and interpreted in one standard way.
+   - **Solana Pay**: @solana/pay is a JavaScript library for facilitating commerce on Solana using a token transfer URL scheme. The URL scheme ensures that payment requests are created and interpreted consistently across different wallets or services.
    - **BARK Web3 Payments Gateway**: Supports donations and payments in BARK, SOL, and USDC, offering flexibility and convenience.
 
 6. **Payments Widget**:
@@ -94,7 +94,7 @@ To get started with BARK Protocol, follow these steps:
 
 Rename `env.local.example` to `env.local` and add the required variables:
 
-```
+```bash
 NEXT_PUBLIC_MAINNET_PROGRAM_ID=
 NEXT_PUBLIC_DEVNET_PROGRAM_ID=
 NEXT_PUBLIC_SHYFT_IPFS_PROJECT_ID=
@@ -113,6 +113,7 @@ NEXT_PUBLIC_OPENID_PROVIDER_URL=https://accounts.google.com/.well-known/openid-c
 NEXT_PUBLIC_FULLNODE_URL=https://fullnode.testnet.solana:443
 NEXT_PUBLIC_PACKAGE_ID=
 ```
+
 ## Programs
 
 **Escrow Public Key**: 
