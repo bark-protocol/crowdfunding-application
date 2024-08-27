@@ -1,7 +1,7 @@
 import * as anchor from "@coral-xyz/anchor";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { getProgramDerivedCampaign, getProgramDerivedContribution } from "./addressDerivation";
-import idl from "./idl.json"; // Path to your IDL file
+import idl from "./idl.json";
 
 // Define the provider and program
 const provider = anchor.AnchorProvider.env();

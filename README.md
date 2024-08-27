@@ -90,6 +90,10 @@ To get started with BARK Protocol, follow these steps:
 - **Arweave/IPFS Access**: For decentralized storage.
 - **Solana Pay Integration**: For payment processing.
 
+### Program Tests
+
+- **Program Test Tool**: (https://beta.solpg.io/)
+
 ### Environment Variables
 
 Rename `env.local.example` to `env.local` and add the required variables:

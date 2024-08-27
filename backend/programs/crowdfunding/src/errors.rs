@@ -25,5 +25,5 @@ pub enum Errors {
     #[msg("Campaign has not yet ended.")]
     CampaignNotOver,
     #[msg("End time of the campaign must be after the current time.")]
-    EndTimeSmall,
+    EndTimeLate, // Renamed from EndTimeSmall
 }
