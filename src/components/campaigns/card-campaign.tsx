@@ -6,7 +6,7 @@ import { Progress } from '@/components/ui/progress'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { formatNumber, formatCurrency } from '@/lib/utils'
+import { formatNumber } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { CalendarIcon, UsersIcon, DollarSignIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -23,6 +23,16 @@ export interface CardCampaignProps {
   backers: number
   category: string
   currency: 'SOL' | 'USDC'
+}
+
+// Helper function to format currency
+const formatCurrency = (amount: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount)
 }
 
 export const CardCampaign: React.FC<CardCampaignProps> = ({
@@ -84,17 +94,19 @@ export const CardCampaign: React.FC<CardCampaignProps> = ({
         </CardContent>
         <CardFooter className="flex justify-between border-t p-4 text-sm text-muted-foreground">
           <div className="flex items-center">
-            <CalendarIcon className="mr-1 h-4 w-4" />
-            {daysLeft > 0 ? `${daysLeft} days left` : 'Ended'}
+            <CalendarIcon className="mr-1 h-4 w-4" aria-hidden="true" />
+            <span>{daysLeft > 0 ? `${daysLeft} days left` : 'Ended'}</span>
           </div>
           <div className="flex items-center">
-            <UsersIcon className="mr-1 h-4 w-4" />
-            {backers} backers
+            <UsersIcon className="mr-1 h-4 w-4" aria-hidden="true" />
+            <span>{backers} backers</span>
           </div>
           <TooltipProvider>
             <Tooltip>
-              <TooltipTrigger>
-                <DollarSignIcon className="h-4 w-4" />
+              <TooltipTrigger asChild>
+                <button className="flex items-center" aria-label="View both SOL and USDC amounts">
+                  <DollarSignIcon className="h-4 w-4" />
+                </button>
               </TooltipTrigger>
               <TooltipContent>
                 <p>SOL: {formatNumber(raisedSOL)} / {formatNumber(goalSOL)}</p>
