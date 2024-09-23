@@ -16,7 +16,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Label } from '@/components/ui/label'
-import { useSession } from '@/contexts/SessionContext'
 import { donate } from '@/services/programs'
 
 // Define the formatNumber function here since it's not exported from utils
