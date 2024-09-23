@@ -1,88 +1,122 @@
-'use client';
+'use client'
 
-import React, { useContext, useState } from 'react';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { PublicKey } from '@solana/web3.js';
-import { toast } from 'react-toastify';
-import { donate } from '@/services/programs';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { SessionContext } from '../wallets/sessions';
+import React, { useState } from 'react'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { PublicKey } from '@solana/web3.js'
+import { toast } from 'react-hot-toast'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { Label } from '@/components/ui/label'
+import { useSession } from '@/contexts/SessionContext'
+import { donate } from '@/services/programs'
 
-interface DonationModalProps {
-  pdaAddress: string;
-  startTimestamp: number;
-  endTimestamp: number;
-  raisedPercent: number;
-  handleUpdateCampaign: () => void;
+// Define the formatNumber function here since it's not exported from utils
+const formatNumber = (num: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(num)
 }
 
-export const DonationModal = ({
+interface DonationModalProps {
+  pdaAddress: string
+  startTimestamp: number
+  endTimestamp: number
+  raisedPercent: number
+  handleUpdateCampaign: () => Promise<void>
+  campaignName: string
+  goalAmount: number
+}
+
+export function DonationModal({
   pdaAddress,
   startTimestamp,
   endTimestamp,
   raisedPercent,
   handleUpdateCampaign,
-}: DonationModalProps) => {
-  const [amount, setAmount] = useState(0);
-  const currentTime = new Date().getTime();
-  const ref = React.useRef();
+  campaignName,
+  goalAmount,
+}: DonationModalProps) {
+  const [amount, setAmount] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const { publicKey } = useWallet()
+  const { program } = useSession()
 
-  const { program } = useContext(SessionContext);
-  const { publicKey } = useWallet();
+  const handleDonate = async () => {
+    if (!program || !publicKey) {
+      toast.error('Please connect your wallet')
+      return
+    }
 
-  async function handleSubmit() {
-    if (program && publicKey) {
-      if (amount <= 0) {
-        toast.error('amount must be greater than 0');
-        return;
-      }
-
-      try {
-        const campaign = new PublicKey(pdaAddress);
-        await donate(program, campaign, publicKey, amount);
-        toast.success('donation successfull');
-        handleUpdateCampaign();
-        (ref as any).current?.click();
-      } catch (error: any) {
-        toast.error(error.message);
-      }
-    } else {
-      toast.error('connect your wallet');
+    setIsLoading(true)
+    try {
+      const campaign = new PublicKey(pdaAddress)
+      await donate(program, campaign, publicKey, parseFloat(amount))
+      toast.success('Donation successful!')
+      await handleUpdateCampaign()
+      setIsOpen(false)
+      setAmount('')
+    } catch (error: any) {
+      toast.error(error.message || 'An error occurred while processing your donation')
+    } finally {
+      setIsLoading(false)
     }
   }
 
+  const currentTime = new Date().getTime()
+  const isActive = currentTime >= startTimestamp && currentTime <= endTimestamp && raisedPercent < 100
+
   return (
-    <Dialog>
-      <DialogTrigger asChild ref={ref as any}>
-        <Button
-          disabled={
-            startTimestamp > currentTime ||
-            raisedPercent >= 100 ||
-            endTimestamp < currentTime
-          }
-        >
-          Fund this project
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button disabled={!isActive}>
+          {isActive ? 'Donate' : 'Campaign Inactive'}
         </Button>
       </DialogTrigger>
-
       <DialogContent className="sm:max-w-[425px]">
-        <p className="text-[22px] font-bold">Enter the donation amount:</p>
-        <div className="mt-[20px]">
-          <div className="mb-[20px] flex flex-col gap-[5px]">
+        <DialogHeader>
+          <DialogTitle>Donate to {campaignName}</DialogTitle>
+          <DialogDescription>
+            Support this campaign by making a donation. Every contribution counts!
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="amount" className="text-right">
+              Amount (SOL)
+            </Label>
             <Input
+              id="amount"
               type="number"
               value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
+              onChange={(e) => setAmount(e.target.value)}
+              className="col-span-3"
+              placeholder="Enter donation amount"
+              min="0"
+              step="0.01"
+              aria-describedby="amount-description"
             />
-            <span className="text-sm">Amount in SOL</span>
           </div>
-          <Button className="w-full" onClick={handleSubmit}>
-            Pay Now
-          </Button>
+          <p id="amount-description" className="text-sm text-muted-foreground">
+            Campaign Goal: {formatNumber(goalAmount)} SOL
+          </p>
         </div>
+        <DialogFooter>
+          <Button onClick={handleDonate} disabled={isLoading || !amount || parseFloat(amount) <= 0}>
+            {isLoading ? 'Processing...' : 'Confirm Donation'}
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}

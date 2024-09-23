@@ -1,6 +1,6 @@
-import Link from 'next/link';
-
-import { ContentLayout } from '@/components/admin-panel/content-layout';
+import Link from 'next/link'
+import { Suspense } from 'react'
+import { ContentLayout } from '@/components/admin-panel/content-layout'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,18 +8,17 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
+} from '@/components/ui/breadcrumb'
+import { CampaignClient } from './CampaignClient'
+import { truncateAddress } from '@/utils'
+import { getCampaignData } from '@/lib/getCampaignData'
+import { LoadingSpinner } from '@/components/spinner'
 
-import { Campaign } from './campaign';
-import { truncateAddress } from '@/utils';
+export default async function CampaignPage({ params }: { params: { pda: string } }) {
+  const campaignData = await getCampaignData(params.pda)
 
-type PageProps = {
-  params: { pda: string };
-};
-
-export default function CampaignPage({ params: { pda } }: PageProps) {
   return (
-    <ContentLayout title={`Campaign: ${truncateAddress(pda)}`}>
+    <ContentLayout title={`Campaign: ${truncateAddress(params.pda)}`}>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -35,11 +34,13 @@ export default function CampaignPage({ params: { pda } }: PageProps) {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{truncateAddress(pda)}</BreadcrumbPage>
+            <BreadcrumbPage>{truncateAddress(params.pda)}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <Campaign pda={pda} />
+      <Suspense fallback={<LoadingSpinner />}>
+        <CampaignClient initialCampaignData={campaignData} pda={params.pda} />
+      </Suspense>
     </ContentLayout>
-  );
+  )
 }

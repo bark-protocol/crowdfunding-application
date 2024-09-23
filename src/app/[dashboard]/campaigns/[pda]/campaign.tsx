@@ -1,26 +1,27 @@
-'use client';
+'use client'
 
-import React, { useContext, useState, useEffect } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { CampaignDetail } from '@/components';
-import { CampaignData, IPFS_BASE_URL } from '@/types';
-import { SessionContext } from '@/components/wallets/sessions';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import React, { useState, useEffect } from 'react'
+import { Card, CardContent } from '@/components/ui/card'
+import { CampaignDetail } from '@/components/CampaignDetail'
+import { CampaignData, IPFS_BASE_URL } from '@/types'
+import { useWallet } from '@solana/wallet-adapter-react'
+import { LAMPORTS_PER_SOL } from '@solana/web3.js'
+import { useProgram } from '@/hooks/useProgram'
 
-interface CampaignProps {
-  pda: string;
+interface CampaignClientProps {
+  initialCampaignData: CampaignData | null
+  pda: string
 }
 
-export const Campaign: React.FC<CampaignProps> = ({ pda }) => {
-  const [campaign, setCampaign] = useState<CampaignData | null>(null);
-  const { program } = useContext(SessionContext);
-  const { publicKey } = useWallet();
+export function CampaignClient({ initialCampaignData, pda }: CampaignClientProps) {
+  const [campaign, setCampaign] = useState<CampaignData | null>(initialCampaignData)
+  const { program } = useProgram()
+  const { publicKey } = useWallet()
 
   const fetchCampaign = async () => {
     if (program && publicKey) {
       try {
-        const campaignData = await program.account.campaign.fetch(pda);
+        const campaignData = await program.account.campaign.fetch(pda)
 
         const newCampaign: CampaignData = {
           orgName: campaignData.orgName,
@@ -35,19 +36,21 @@ export const Campaign: React.FC<CampaignProps> = ({ pda }) => {
           endTimestamp: campaignData.endAt.toNumber() * 1000,
           donationCompleted: campaignData.donationCompleted,
           isClaimed: campaignData.claimed,
-        };
+        }
         
-        setCampaign(newCampaign);
+        setCampaign(newCampaign)
       } catch (error) {
-        console.error('Failed to fetch campaign data:', error);
-        setCampaign(null);
+        console.error('Failed to fetch campaign data:', error)
+        setCampaign(null)
       }
     }
-  };
+  }
 
   useEffect(() => {
-    fetchCampaign();
-  }, [program, publicKey]);
+    if (!initialCampaignData) {
+      fetchCampaign()
+    }
+  }, [program, publicKey, initialCampaignData])
 
   return (
     <Card className="mt-6 min-h-[calc(100vh_-_220px)] rounded-lg border-none">
@@ -58,9 +61,9 @@ export const Campaign: React.FC<CampaignProps> = ({ pda }) => {
             handleUpdateCampaign={fetchCampaign}
           />
         ) : (
-          <p>Loading campaign data...</p>
+          <p role="alert" className="text-center">Loading campaign data...</p>
         )}
       </CardContent>
     </Card>
-  );
-};
+  )
+}

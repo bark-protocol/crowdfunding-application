@@ -2,11 +2,12 @@
 
 import { useWalletMultiButton } from '@solana/wallet-adapter-base-ui';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
-import { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { getAccountBalance } from '@/services/web3';
-import { SessionContext } from './sessions';
+import { useSession } from '@/contexts/session-context';
+import { toast } from 'react-hot-toast';
 
-type BaseWalletMultiButtonProps = any & {
+type BaseWalletMultiButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   labels: Omit<
     {
       [TButtonState in ReturnType<
@@ -40,18 +41,16 @@ export function BaseWalletMultiButton({
       setModalVisible(true);
     },
   });
-  const { selectedNetwork } = useContext(SessionContext);
-  const [walletBalance, setWalletBalance] = useState(0);
+  const { selectedNetwork } = useSession();
+  const [walletBalance, setWalletBalance] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const ref = useRef<HTMLUListElement>(null);
+
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
       const node = ref.current;
-
-      // Do nothing if clicking dropdown or its descendants
       if (!node || node.contains(event.target as Node)) return;
-
       setMenuOpen(false);
     };
 
@@ -63,6 +62,7 @@ export function BaseWalletMultiButton({
       document.removeEventListener('touchstart', listener);
     };
   }, []);
+
   const content = useMemo(() => {
     if (children) {
       return children;
@@ -76,17 +76,24 @@ export function BaseWalletMultiButton({
     }
   }, [buttonState, children, labels, publicKey]);
 
-  const updateWalletbalance = async () => {
+  const updateWalletBalance = async () => {
     if (publicKey) {
-      const newBalance = await getAccountBalance(
-        publicKey.toString(),
-        selectedNetwork,
-      );
-      setWalletBalance(Number(newBalance.toFixed(3)));
+      try {
+        const newBalance = await getAccountBalance(
+          publicKey.toString(),
+          selectedNetwork,
+        );
+        setWalletBalance(Number(newBalance.toFixed(3)));
+      } catch (error) {
+        console.error('Failed to fetch wallet balance:', error);
+        toast.error('Failed to fetch wallet balance');
+        setWalletBalance(null);
+      }
     }
   };
+
   useEffect(() => {
-    updateWalletbalance();
+    updateWalletBalance();
   }, [publicKey, selectedNetwork]);
 
   return (
@@ -111,57 +118,78 @@ export function BaseWalletMultiButton({
               break;
           }
         }}
-        walletIcon={walletIcon}
-        walletName={walletName}
       >
         <span className="flex items-center gap-[5px]">
           {publicKey && (
-            <span className="hidden sm:block">{walletBalance} SOL</span>
+            <span className="hidden sm:block">
+              {walletBalance !== null ? `${walletBalance} SOL` : 'Loading...'}
+            </span>
           )}
           {content}
         </span>
       </button>
       <ul
-        aria-label="dropdown-list"
+        aria-label="wallet options"
         className={`wallet-adapter-dropdown-list !bg-white dark:!bg-secondary ${menuOpen && 'wallet-adapter-dropdown-list-active'}`}
         ref={ref}
         role="menu"
       >
-        {publicKey ? (
+        {publicKey && (
           <li
-            className="wallet-adapter-dropdown-list-item !text-primary hover:!bg-blue-400  dark:hover:!bg-blue-900"
+            className="wallet-adapter-dropdown-list-item !text-primary hover:!bg-blue-400 dark:hover:!bg-blue-900"
             onClick={async () => {
               await navigator.clipboard.writeText(publicKey.toBase58());
               setCopied(true);
               setTimeout(() => setCopied(false), 400);
             }}
             role="menuitem"
+            tabIndex={0}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                e.currentTarget.click();
+              }
+            }}
           >
             {copied ? labels['copied'] : labels['copy-address']}
           </li>
-        ) : null}
+        )}
         <li
-          className="wallet-adapter-dropdown-list-item !text-primary hover:!bg-blue-400  dark:hover:!bg-blue-900"
+          className="wallet-adapter-dropdown-list-item !text-primary hover:!bg-blue-400 dark:hover:!bg-blue-900"
           onClick={() => {
             setModalVisible(true);
             setMenuOpen(false);
           }}
           role="menuitem"
+          tabIndex={0}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              e.currentTarget.click();
+            }
+          }}
         >
           {labels['change-wallet']}
         </li>
-        {onDisconnect ? (
+        {onDisconnect && (
           <li
-            className="wallet-adapter-dropdown-list-item !text-primary hover:!bg-blue-400  dark:hover:!bg-blue-900"
+            className="wallet-adapter-dropdown-list-item !text-primary hover:!bg-blue-400 dark:hover:!bg-blue-900"
             onClick={() => {
               onDisconnect();
               setMenuOpen(false);
             }}
             role="menuitem"
+            tabIndex={0}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                e.currentTarget.click();
+              }
+            }}
           >
             {labels['disconnect']}
           </li>
-        ) : null}
+        )}
       </ul>
     </div>
   );
