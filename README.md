@@ -1,95 +1,213 @@
-{
-  "name": "crowdfunding",
-  "description": "BARK Protocol´s Crowdfunding dApp is designed to enhance the efficiency, security, and transparency of fundraising campaigns.",
-  "version": "1.0.0-beta",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint:next": "next lint",
-    "lint:eslint": "eslint --ext \".js,.jsx,.ts,.tsx\" --ignore-path .gitignore .",
-    "lint:prettier": "prettier --check .",
-    "lint:fix": "prettier --write \"src/**/*{.ts,.tsx}\"",
-    "test": "jest",
-    "prepare": "npm run build"
-  },
-  "dependencies": {
-    "@coral-xyz/anchor": "^0.31.1",
-    "@hookform/resolvers": "^5.2.1",
-    "@paypal/react-paypal-js": "^8.8.3",
-    "@radix-ui/react-accordion": "^1.2.11",
-    "@radix-ui/react-aspect-ratio": "^1.1.0",
-    "@radix-ui/react-avatar": "^1.1.0",
-    "@radix-ui/react-collapsible": "^1.1.0",
-    "@radix-ui/react-context-menu": "^2.2.1",
-    "@radix-ui/react-dialog": "^1.1.1",
-    "@radix-ui/react-dropdown-menu": "^2.1.15",
-    "@radix-ui/react-icons": "^1.3.0",
-    "@radix-ui/react-label": "^2.1.0",
-    "@radix-ui/react-menubar": "^1.1.1",
-    "@radix-ui/react-navigation-menu": "^1.2.0",
-    "@radix-ui/react-popover": "^1.1.1",
-    "@radix-ui/react-progress": "^1.1.0",
-    "@radix-ui/react-radio-group": "^1.2.0",
-    "@radix-ui/react-scroll-area": "^1.1.0",
-    "@radix-ui/react-select": "^2.1.1",
-    "@radix-ui/react-slot": "^1.1.0",
-    "@radix-ui/react-switch": "^1.1.0",
-    "@radix-ui/react-tabs": "^1.1.0",
-    "@radix-ui/react-toast": "^1.2.1",
-    "@radix-ui/react-tooltip": "^1.1.2",
-    "@solana/spl-token": "^0.4.13",
-    "@solana/spl-token-metadata": "0.1.6",
-    "@solana/wallet-adapter-base": "^0.9.27",
-    "@solana/wallet-adapter-react": "^0.15.39",
-    "@solana/wallet-adapter-react-ui": "^0.9.39",
-    "@solana/wallet-adapter-wallets": "^0.19.37",
-    "@solana/web3.js": "^1.98.3",
-    "@stripe/react-stripe-js": "^3.9.0",
-    "@stripe/stripe-js": "^7.8.0",
-    "@walletconnect/web3wallet": "^1.16.1",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "cmdk": "1.1.1",
-    "date-fns": "^4.1.0",
-    "geist": "^1.4.2",
-    "git": "^0.1.5",
-    "install": "^0.13.0",
-    "lfs": "^0.0.4",
-    "lucide-react": "^0.539.0",
-    "next": "15.4.6",
-    "next-themes": "^0.4.6",
-    "pino-pretty": "^13.1.1",
-    "react": "^19.1.1",
-    "react-day-picker": "^9.8.1",
-    "react-dom": "^19.1.1",
-    "react-hook-form": "^7.62.0",
-    "react-hot-toast": "^2.5.2",
-    "react-icons": "^5.5.0",
-    "react-spinners": "^0.17.0",
-    "sharp": "^0.34.3",
-    "tailwind-merge": "^3.3.1",
-    "tailwindcss-animate": "^1.0.7",
-    "zod": "^4.0.17",
-    "zustand": "^4.5.5"
-  },
-  "devDependencies": {
-    "@types/node": "^22.4.0",
-    "@types/react": "^18.3.4",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "jest": "^29.7.0",
-    "postcss": "^8.4.41",
-    "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.6",
-    "react-testing-library": "^8.0.1",
-    "react-toastify": "^10.0.5",
-    "tailwindcss": "^3.4.10",
-    "typescript": "^5.5.4"
-  }
-}
+![Banner](screenshots/screenshot.png)
+
+# BARK Protocol: Solana-Based Crowdfunding Platform
+
+**Prototype**
+
+Welcome to the BARK Crowdfunding GitHub repository! This repository contains the codebase and documentation for our decentralized crowdfunding platform built on the Solana blockchain. BARK Protocol provides a secure, scalable, and user-friendly solution for fundraising, leveraging Solana’s high-performance capabilities.
+
+---
+
+## 🌟 Overview
+
+BARK | Crowdfunding dApp is designed to enhance the efficiency, security, and transparency of fundraising campaigns. It supports multi-currency contributions, integrates decentralized storage solutions, and employs advanced analytics and AI logic for real-time decision making.
+
+---
+
+## 🚀 Key Features
+
+- **User-Friendly Interface**: Built with React.js, Next.js, Tailwind, and Shadcn.
+- **Solana Blockchain Integration**: Fast, low-cost transactions.
+- **SUI Network Compatibility**: Supports scalable smart contracts and cross-chain logic.
+- **Secure Donations**: Transparent and immutable via blockchain.
+- **Automated Token Minting**: Fundraiser tokens are minted and distributed to donors.
+- **Digital Fund Receipts**: Non-custodial proof of donation.
+- **Decentralized Storage**: Arweave/IPFS for tamper-proof metadata and media.
+- **Real-Time Oracles**: Powered by Chainlink and Pyth for live financial and supply chain data.
+- **Wallet Integration**: Phantom, Backpack, Solflare, and others.
+- **Solana Pay Integration**: Seamless QR code-based payments.
+- **Multi-Currency Support**: Accepts BARK, SOL, USDC, and other SPL tokens.
+- **BARK Token Factory**: Easily create and distribute custom SPL tokens for each campaign.
+- **AI-Powered Dashboard**: Insights from campaign performance, donation behavior, and forecasting.
+- **Embedded Payment Widget**: Lightweight donation module for third-party embedding.
+- **AI Chat Agents**: Conversational support for campaign managers and donors.
+- **Governance**: On-chain decision-making for community-driven upgrades.
+
+---
+
+## 🏗️ Architecture
+
+### Main Components
+
+1. **Frontend**:
+   - Built in React, Tailwind, and Shadcn.
+   - Interacts with blockchain via Solana Web3.js and Solana Pay.
+
+2. **Backend / Smart Contracts**:
+   - Written in Anchor for Solana and Move for SUI.
+   - Includes token factory, escrow logic, and governance.
+
+3. **Storage**:
+   - IPFS/Arweave for campaign metadata, images, and videos.
+
+4. **Payments & Tokens**:
+   - Solana Pay, Token Program, and custom BARK Web3 Payment Gateway.
+
+5. **Oracle Integrations**:
+   - **Chainlink** for supply chain, disaster alerts, weather.
+   - **Pyth** for live price feeds and financial data.
+
+6. **Analytics Layer**:
+   - Real-time campaign insights, fraud detection, and prediction models via integrated AI.
+
+7. **AI Agent & Chat**:
+   - Custom agents using OpenAI or OSS LLMs for:
+     - Campaign help
+     - Transaction assistance
+     - Donor support
+
+8. **Cross-Chain & Network Support**:
+   - **Solana**: Devnet, Testnet, Mainnet.
+   - **SUI**: For scalable contract interactions.
+
+---
+
+## 📌 Use Cases
+
+- **Charity & Non-Profits**: Real-time campaign tracking, impact reporting.
+- **Disaster Relief**: Fast, transparent response funding.
+- **Healthcare Crowdfunding**: Verified wallets and use of funds.
+- **Humanitarian Crisis Aid**: Transparent logistics and delivery tracking via oracles.
+- **Startup Launchpads**: Community-driven seed funding with token incentives.
+- **Creative Projects**: Raise funds with instant reward minting.
+- **Local Community Projects**: Easy onboarding and payment via wallet or QR.
+
+---
+
+## 📸 Screenshots
+
+![screenshot](./frontend/assets/screenshot1.png)
+![screenshot](./frontend/assets/screenshot2.png)
+![screenshot](./frontend/assets/screenshot3.png)
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+- Node.js
+- Solana Wallet (Phantom, Backpack, Solflare)
+- Arweave or IPFS credentials (e.g. Pinata)
+- Solana CLI, Anchor CLI
+- RPC URLs (Helius, QuickNode, or Alchemy)
+
+### Environment Variables
+
+Rename `.env.local.example` to `.env.local` and set:
+
+```env
+NEXT_PUBLIC_MAINNET_PROGRAM_ID=
+NEXT_PUBLIC_DEVNET_PROGRAM_ID=
+NEXT_PUBLIC_SHYFT_IPFS_PROJECT_ID=
+NEXT_PUBLIC_SHYFT_IPFS_PROJECT_SECRET=
+NEXT_PUBLIC_SHYFT_API=
+NEXT_PUBLIC_CLIENT_ID=
+NEXT_PUBLIC_CLIENT_SECRET=
+NEXT_PUBLIC_PROVIDER_URL=
+NEXT_PUBLIC_SOLANA_NETWORK=devnet
+NEXT_PUBLIC_SOLANA_RPC_URL=https://api.devnet.solana.com
+NEXT_PUBLIC_SUI_RPC_URL=https://fullnode.testnet.sui.io
+NEXT_PUBLIC_MINT_API_URL=https://api.actions.barkprotocol.net/mint
+NEXT_PUBLIC_HELIUS_RPC_URL=https://mainnet.helius-rpc.com/?api-key=your_key
+PINATA_JWT=
+ALCHEMY_SOLANA_MAINNET=
+ALCHEMY_SOLANA_DEVNET=
+NEXT_PUBLIC_REDIRECT_URL=http://localhost:3000/callback
+NEXT_PUBLIC_OPENID_PROVIDER_URL=https://accounts.google.com/.well-known/openid-configuration
+NEXT_PUBLIC_FULLNODE_URL=https://fullnode.testnet.solana:443
+NEXT_PUBLIC_PACKAGE_ID=
+````
+
+---
+
+## 🧠 AI & Agent Integrations
+
+* AI-powered dashboard widgets.
+* Chatbot agents for:
+
+  * Donor FAQs
+  * Campaign creation
+  * Status tracking
+* Planned integrations:
+
+  * OpenAI
+  * HuggingFace LLMs
+  * LangChain
+
+---
+
+## 🧪 Smart Contracts
+
+Navigate to the `contract/` folder to test and deploy:
+
+```bash
+cd contract
+anchor test
+anchor build
+anchor deploy
+```
+
+View your program:
+
+[Solana Testnet Explorer](https://solscan.io/testnet/BARK36EnfrDah5j5r1Rw9ZMkv3i4Q3XUGBZjGixaZT43)
+
+Program ID (Dev):
+`BARK36EnfrDah5j5r1Rw9ZMkv3i4Q3XUGBZjGixaZT43`
+
+---
+
+## 🛠️ Running the App
+
+```bash
+npm install
+npm run dev
+```
+
+Then visit [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 📤 Deployment
+
+Easily deploy via [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+
+---
+
+## 🤝 Contributing
+
+We welcome your ideas, pull requests, and feedback.
+Check the [CONTRIBUTING.md](CONTRIBUTING.md) for setup.
+
+---
+
+## 📜 License
+
+MIT License – see [LICENSE](LICENSE).
+
+---
+
+## 📢 Disclaimer
+
+This project is for educational and prototype purposes. Always consult with legal and financial professionals before launching crowdfunding campaigns using smart contracts.
+
+---
+
+## 📚 Learn More
+
+* [Next.js Docs](https://nextjs.org/docs)
+* [Solana Pay](https://solana.com/pay)
+* [Chainlink Docs](https://docs.chain.link)
+* [Pyth Network](https://pyth.network/)
+* [Helius RPC](https://www.helius.xyz/)
+* [SUI Network](https://docs.sui.io/)
